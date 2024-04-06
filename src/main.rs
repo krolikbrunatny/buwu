@@ -22,9 +22,13 @@ fn setup_logger() {
 }
 
 fn load_config() -> Result<AppConfig> {
+    let mut dir = env::current_exe()?;
+    dir.pop();
+    let dir = dir.to_str().unwrap();
+
     let config: AppConfig = Figment::new()
-        .merge(Toml::file(".config.toml"))
-        .merge(Env::prefixed("DMB_"))
+        .merge(Toml::file(format!("{}/.config.toml", dir)))
+        .merge(Env::prefixed("BUWU"))
         .extract()?;
 
     Ok(config)
@@ -42,7 +46,10 @@ fn run_test_mode_only() -> Result<()> {
 fn main() {
     match try_main() {
         Ok(_) => (),
-        Err(error) => error!("{}", error.to_string()),
+        Err(error) => {
+            error!("{}", error.to_string());
+            process::exit(1)
+        }
     }
 }
 
