@@ -1,0 +1,30 @@
+[package]
+name = "buwu"
+version = "0.1.0"
+edition = "2021"
+
+# https://stackoverflow.com/a/54842093
+[profile.release]
+opt-level = 'z'   # Optimize for size
+lto = true        # Enable link-time optimization
+codegen-units = 1 # Reduce number of codegen units to increase optimizations
+panic = 'abort'   # Abort on panic
+strip = true      # Strip symbols from binary*
+
+[dependencies]
+reqwest = { version = "0.12", features = ["cookies", "blocking"] }
+tokio = { version = "1", features = ["full"] }
+anyhow = "1.0"
+scraper = "0.19.0"
+chrono = "0.4.37"
+simplelog = "0.12.0"
+log = "0.4.21"
+confy = { version = "0.6.1", features = [
+  "yaml_conf",
+], default-features = false }
+serde = { version = "1.0.197", features = ["serde_derive"] }
+serde_derive = "1.0.197"
+figment = { version = "0.10.15", features = ["env", "toml"] }
+
+[dev-dependencies]
+pretty_assertions = "1.4.0"
