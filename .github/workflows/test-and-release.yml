@@ -29,8 +29,6 @@ jobs:
             name: buwu-Darwin-arm64.tar.gz
         toolchain:
           - stable
-          - beta
-          - nightly
     steps:
       - uses: actions/checkout@v4
       - name: Cache cargo & target directories
