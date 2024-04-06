@@ -36,7 +36,7 @@ jobs:
       - name: Cache cargo & target directories
         uses: Swatinem/rust-cache@v2
         with:
-          key: "v1"
+          key: "v2"
       - name: Configure Git
         run: |
           git config --global user.email "jdoe@example.com"
