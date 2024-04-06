@@ -44,9 +44,6 @@ jobs:
       - name: Install musl-tools on Linux
         run: sudo apt-get update --yes && sudo apt-get install --yes musl-tools
         if: contains(matrix.platform.name, 'Linux')
-      - name: Install musl-tools on Linuxx
-        run: sudo apt-get update --yes && sudo apt-get install --yes musl-tools
-        if: contains(matrix.platform.name, 'Linux')
       - name: Build binary
         uses: houseabsolute/actions-rust-cross@v0
         with:
