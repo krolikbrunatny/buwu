@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+{ # this ensures the entire script is downloaded #
 
 # Pull binary
 INSTALL_DIR="$(pwd)/buwu"
@@ -62,3 +64,5 @@ CMD="0 */4 * * * ${BINARY} >> ${LOG_FILE} 2>&1 && echo >> ${LOG_FILE}"
 if [ $? -eq 0 ]; then
   echo "Installation successful!"
 fi
+
+} # this ensures the entire script is downloaded #
