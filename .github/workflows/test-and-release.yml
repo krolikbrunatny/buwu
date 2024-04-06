@@ -6,6 +6,7 @@ env:
   RUST_BACKTRACE: 1
 jobs:
   test:
+    if: startsWith( github.ref, 'refs/tags/v' )
     name: ${{ matrix.platform.os_name }} with rust ${{ matrix.toolchain }}
     runs-on: ${{ matrix.platform.os }}
     strategy:
@@ -67,25 +68,19 @@ jobs:
             tar czvf ../../../${{ matrix.platform.name }} ${{ matrix.platform.bin }}
           cd -
         if: |
-          matrix.toolchain == 'stable' &&
-          ( startsWith( github.ref, 'refs/tags/v' ) ||
-            github.ref == 'refs/tags/test-release' )
+          matrix.toolchain == 'stable'
       - name: Publish release artifacts
         uses: actions/upload-artifact@v3
         with:
           name: buwu-${{ matrix.platform.os_name }}
           path: "buwu-*"
-        if: matrix.toolchain == 'stable' && github.ref == 'refs/tags/test-release'
+        if: matrix.toolchain == 'stable'
       - name: Generate SHA-256
         run: shasum -a 256 ${{ matrix.platform.name }}
         if: |
           matrix.toolchain == 'stable' &&
-          matrix.platform.os == 'macOS-latest' &&
-          ( startsWith( github.ref, 'refs/tags/v' ) ||
-            github.ref == 'refs/tags/test-release' )
+          matrix.platform.os == 'macOS-latest'
       - name: Publish GitHub release
         uses: softprops/action-gh-release@v1
         with:
-          draft: true
           files: "buwu*"
-        if: matrix.toolchain == 'stable' && startsWith( github.ref, 'refs/tags/v' )
