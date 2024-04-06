@@ -41,9 +41,9 @@ do
 
   # Save credentials
   cat > $CONFIG << EOL
-  username = "${username}"
-  password = "${password}"
-  days_threshold = 4
+username = "${username}"
+password = "${password}"
+days_threshold = 4
 EOL
 
   echo "Validating credentials..."
