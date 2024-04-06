@@ -27,7 +27,7 @@ fn load_config() -> Result<AppConfig> {
     let dir = dir.to_str().unwrap();
 
     let config: AppConfig = Figment::new()
-        .merge(Toml::file(format!("{}/.config.toml", dir)))
+        .merge(Toml::file(format!("{}/config.toml", dir)))
         .merge(Env::prefixed("BUWU"))
         .extract()?;
 
