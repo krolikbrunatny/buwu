@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-{ # this ensures the entire script is downloaded #
-
 # Pull binary
 INSTALL_DIR="$(pwd)/buwu"
 mkdir -p $INSTALL_DIR
@@ -37,8 +35,8 @@ chmod 600 $CONFIG
 # Get credentials
 while true
 do
-  read -p "Library card number: " username
-  read -s -p "Password: " password
+  read -p "Library card number: " username < /dev/tty
+  read -s -p "Password: " password < /dev/tty
   echo
 
   # Save credentials
@@ -64,5 +62,3 @@ CMD="0 */4 * * * ${BINARY} >> ${LOG_FILE} 2>&1 && echo >> ${LOG_FILE}"
 if [ $? -eq 0 ]; then
   echo "Installation successful!"
 fi
-
-} # this ensures the entire script is downloaded #
