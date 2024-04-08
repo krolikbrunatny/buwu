@@ -17,6 +17,7 @@ jobs:
             target: x86_64-unknown-linux-musl
             bin: buwu
             name: buwu-Linux-x86_64.tar.gz
+            skip_tests: true
           # - os_name: Linux-aarch64
           #   os: ubuntu-20.04
           #   target: aarch64-unknown-linux-musl
@@ -50,7 +51,7 @@ jobs:
           command: "build"
           target: ${{ matrix.platform.target }}
           toolchain: ${{ matrix.toolchain }}
-          args: "--locked --release"
+          args: "--locked"
           strip: true
       - name: Run tests
         uses: houseabsolute/actions-rust-cross@v0

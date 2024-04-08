@@ -57,8 +57,11 @@ pub fn login(client: &Client, (username, password): (&String, &String)) -> Resul
             username, password
         ))
         .header("Content-Type", "application/x-www-form-urlencoded")
-        .send()?
-        .text()?;
+        .send();
+
+    dbg!(&response);
+
+    let response = response?.text()?;
 
     if let Some(_) = response.find("Wyloguj") {
         return Ok(());
