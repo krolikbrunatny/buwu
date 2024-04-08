@@ -9,7 +9,11 @@ debug = true
 
 
 [dependencies]
-reqwest = { version = "0.12", features = ["cookies", "blocking"] }
+reqwest = { version = "0.12", default-features = false, features = [
+  "cookies",
+  "blocking",
+  "rustls-tls",
+] }
 tokio = { version = "1", features = ["full"] }
 anyhow = "1.0"
 scraper = "0.19.0"
@@ -19,7 +23,6 @@ log = "0.4.21"
 serde = { version = "1.0.197", features = ["serde_derive"] }
 serde_derive = "1.0.197"
 figment = { version = "0.10.15", features = ["env", "toml"] }
-openssl = { version = "0.10", features = ["vendored"] }
 
 [dev-dependencies]
 pretty_assertions = "1.4.0"
