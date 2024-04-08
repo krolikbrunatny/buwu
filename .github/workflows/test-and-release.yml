@@ -1,5 +1,5 @@
 name: Test and release
-on: [push, pull_request]
+on: [push]
 env:
   CRATE_NAME: buwu
   GITHUB_TOKEN: ${{ github.token }}
