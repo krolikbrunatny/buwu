@@ -21,6 +21,21 @@ fi
 echo "Downloading binary..."
 curl -s -L https://github.com/krolikbrunatny/buwu/releases/download/v0.0.1/$ARCHIVE | tar xz -C ./buwu
 
+# Enable legacy unsafe renegotiation
+OPENSSL_CFG="openssl_conf = openssl_init
+
+[openssl_init]
+ssl_conf = ssl_sect
+
+[ssl_sect]
+system_default = system_default_sect
+
+[system_default_sect]
+Options = UnsafeLegacyRenegotiation
+"
+echo $OPENSSL_CFG > $INSTALL_DIR/openssl.cfg
+OPENSSL_ENV="OPENSSL_CONF=${INSTALL_DIR}/openssl.cfg"
+
 # Create config file
 CONFIG="${INSTALL_DIR}/config.toml"
 BINARY="${INSTALL_DIR}/buwu"
@@ -47,7 +62,7 @@ days_threshold = 4
 EOL
 
   echo "Validating credentials..."
-  $BINARY --test
+  $OPENSSL_ENV $BINARY --test
   if [ $? -eq 0 ]; then
     break
   else
@@ -56,7 +71,7 @@ EOL
 done
 
 # Install crontab
-CMD="0 */4 * * * ${BINARY} >> ${LOG_FILE} 2>&1 && echo >> ${LOG_FILE}"
+CMD="0 */4 * * *  ${OPENSSL_ENV} ${BINARY} >> ${LOG_FILE} 2>&1 && echo >> ${LOG_FILE}"
 (crontab -l 2>/dev/null | grep -v ".buwu/buwu") | crontab - # clean
 (crontab -l 2>/dev/null; echo "$CMD") | crontab -
 if [ $? -eq 0 ]; then
