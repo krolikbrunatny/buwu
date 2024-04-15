@@ -22,7 +22,7 @@ Skrypt poprosi Cię o podanie numeru karty bibliotecznej oraz hasła, następnie
 
 ## Jak wyłączyć?
 
-Aby zakazać programowi samodzielnego uruchamiania:
+Jeśli chcesz wyłączyć samouruchamianie się programu:
 
 ```shell
 (crontab -l 2>/dev/null | grep -v "buwu/buwu") | crontab -
