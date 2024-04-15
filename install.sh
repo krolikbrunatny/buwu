@@ -74,7 +74,7 @@ done
 # Every 6 hours at random minute
 RANDOM_MINUTE=$(($RANDOM % 60))
 CMD="${RANDOM_MINUTE} */6 * * * (export ${OPENSSL_ENV}; ${BINARY} >> ${LOG_FILE} 2>&1 && echo >> ${LOG_FILE})"
-(crontab -l 2>/dev/null | grep -v ".buwu/buwu") | crontab - # clean
+(crontab -l 2>/dev/null | grep -v "buwu/buwu") | crontab - # clean
 (crontab -l 2>/dev/null; echo "$CMD") | crontab -
 if [ $? -eq 0 ]; then
   echo "Installation successful!"
