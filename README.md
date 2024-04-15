@@ -1,6 +1,6 @@
 Jako odpowiedzialna osoba studencka zwracasz książki na czas, gdy już ich nie potrzebujesz. Niemniej jednak wypożyczając wiele książek, musisz co kilka dni jakąś przedłużyć.
 
-![books](books.jpg "Books")
+![books](books.jpg "Books" | width=200)
 
 Ten prosty program będzie przedłużał książki za Ciebie 4 dni przed upływem terminu. Dlaczego 4 dni? Ponieważ 3 dni przed upływem terminu wysyłane jest powiadomienie mailowe - jeśli je dostaniesz, to znaczy, że coś poszło nie tak.
 
