@@ -33,7 +33,7 @@ system_default = system_default_sect
 [system_default_sect]
 Options = UnsafeLegacyRenegotiation
 "
-echo $OPENSSL_CFG > $INSTALL_DIR/openssl.cfg
+printf "$OPENSSL_CFG" > $INSTALL_DIR/openssl.cfg
 OPENSSL_ENV="OPENSSL_CONF=${INSTALL_DIR}/openssl.cfg"
 
 # Create config file
